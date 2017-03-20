@@ -2,10 +2,10 @@ var express = require('express');
 var path = require('path');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
-var businesses = require('./apiRoutes/businesses');
-var categories = require('./apiRoutes/categories');
-var offers = require('./apiRoutes/offers');
-var config = require('./config/database');
+var businesses = require('./app/apiRoutes/businesses');
+var categories = require('./app/apiRoutes/categories');
+var offers = require('./app/apiRoutes/offers');
+var config = require('./app/config/database');
 var Promise = require("bluebird");
 
 mongoose.Promise = Promise;
@@ -13,7 +13,7 @@ mongoose.Promise = Promise;
 // Create Instance of Express
 var app = express();
 // Sets an initial port. We'll use this later in our listener
-var PORT = process.env.PORT || 8888;
+var PORT = process.env.PORT || 8000;
 
 //Connect to MongoDB
 mongoose.connect(config.db.development);

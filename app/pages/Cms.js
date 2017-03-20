@@ -11,7 +11,7 @@ class Cms extends React.Component {
 
   componentWillMount() {
     this.initializeState({
-      loading: false
+      // loading: false
     });
   }
 

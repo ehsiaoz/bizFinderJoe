@@ -1,7 +1,7 @@
 module.exports = {
   db: {
     production: '#',
-    development:'mongodb://localhost:27017/bizfinder',
+    development:'mongodb://localhost:27017/bizfinder2',
     test:'#'
   }
 };

@@ -34,7 +34,7 @@ router.post('/businesses', function(req, res) {
 
   business.save(function(err, doc) {
     if (err) {
-      return res.send(err);
+      return res.send(err, 400);
     }
 
     res.send(doc);

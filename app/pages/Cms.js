@@ -36,7 +36,7 @@ class Cms extends React.Component {
       <div>
         <h2>New Biz</h2>
         <BizForm
-        submitAction={(postObj) => this.createBiz(bizObj)}
+        submitAction={(bizObj) => this.createBiz(bizObj)}
         />
       </div>
     );

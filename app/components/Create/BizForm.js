@@ -20,7 +20,7 @@ class BizForm extends React.Component {
       thumbnail_url: '',
       desc_snippet: '',
       desc_overview: '',
-      categories: '',
+      categories: [],
     });
   }
 

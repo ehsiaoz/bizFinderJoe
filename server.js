@@ -2,10 +2,10 @@ var express = require('express');
 var path = require('path');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
-var businesses = require('./app/apiRoutes/businesses');
-var categories = require('./app/apiRoutes/categories');
-var offers = require('./app/apiRoutes/offers');
-var config = require('./app/config/database');
+var businesses = require('./apiRoutes/businesses');
+var categories = require('./apiRoutes/categories');
+var offers = require('./apiRoutes/offers');
+var config = require('./settings/database');
 var Promise = require("bluebird");
 
 mongoose.Promise = Promise;
@@ -36,11 +36,14 @@ app.use(bodyParser.json({ type: "application/vnd.api+json" }));
 
 app.use(express.static("./public"));
 
-//Api routes
+// Api routes
 app.use('/api', businesses);
 app.use('/api', categories);
 app.use('/api', offers)
 
+app.get('/', function(req, res) {
+  res.sendFile(__dirname + '/public/app.html');
+});
 
 // Listener
 app.listen(PORT, function() {

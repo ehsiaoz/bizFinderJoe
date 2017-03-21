@@ -4,16 +4,15 @@ import * as axios from 'axios';
 
 class BizList extends React.Component {
   //react lifecycle functions
-
-  initializeState() {
-    this.setState({
-      businesses: [],
-      loading: false
-    });
+  constructor(props) {
+     super(props);
+     this.state ={
+       businesses: [],
+       loading: false
+     }
   }
 
   componentWillMount() {
-    this.initializeState();
     this.getBusinesses();
   }
 
@@ -22,7 +21,7 @@ class BizList extends React.Component {
   getBusinesses() {
     this.startLoading();
     axios.get('/api/businesses')
-    .then((response) =>{
+    .then((response) => {
       console.log('response', response);
       this.endLoading();
       this.setState({
@@ -37,35 +36,26 @@ class BizList extends React.Component {
   }
 
 
-  handleUpdateTextInput(event) {
-    const newState = {};
-    newState[event.target.id] = event.target.value;
-    this.setState(newState);
-  }
-
-  handleSubmit(event) {
-    //prevent submit from refreshing the page
-    event.preventDefault();
-    console.log('Save', this.state);
-    this.props.submitAction(this.state);
-  }
-
   startLoading() {
         this.setState({
           loading: true
         })
     }
 
-    endLoading() {
+  endLoading() {
       this.setState({
         loading: false
       });
     }
 
+
   render() {
+    const bizList = this.state.businesses.map((item, i)=> {
+      return <li key={i}>{item.name}</li>
+    })
     return (
       <div>
-        BizList
+        <ul>{bizList}</ul>
       </div>
     )
   }

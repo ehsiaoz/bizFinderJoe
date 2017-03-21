@@ -41,6 +41,11 @@ class BizForm extends React.Component {
   //   })
   // }
 
+  //get categories to allow user to select from dropdown
+  getCategories() {
+
+  }
+
   handleUpdateTextInput(event) {
     const newState = {};
     newState[event.target.id] = event.target.value;

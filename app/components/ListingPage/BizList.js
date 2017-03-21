@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { Button } from 'antd';
+import * as axios from 'axios';
+
 
 class BizList extends React.Component {
   //react lifecycle functions
@@ -13,17 +14,28 @@ class BizList extends React.Component {
 
   componentWillMount() {
     this.initializeState();
-    getBusinesses();
+    this.getBusinesses();
   }
 
 
   //get businesses from database
   getBusinesses() {
-    axios.get()
-    this.setState({
-      businesses: []
+    this.startLoading();
+    axios.get('/api/businesses')
+    .then((response) =>{
+      console.log('response', response);
+      this.endLoading();
+      this.setState({
+        businesses: response.data
+      });
+      console.log('businesses array', this.state.businesses)
+    })
+    .catch(() => {
+      console.log('error', error);
+      this.endLoading();
     });
   }
+
 
   handleUpdateTextInput(event) {
     const newState = {};
@@ -53,17 +65,12 @@ class BizList extends React.Component {
   render() {
     return (
       <div>
-
+        BizList
       </div>
     )
   }
 }
 
-//Outside of the class
-//We know that this form is going to take in an action...it will require a prop that allows it to pefrom an action
-BizList.propTypes = {
-  //our post form takes in a prop that is a function...isRequired...if i don't give the form a submitAction prop it will throw error
-  submitAction: React.PropTypes.func.isRequired,
-}
 
-export {BizForm};
+
+export {BizList};

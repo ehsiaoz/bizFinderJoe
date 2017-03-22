@@ -1,88 +1,30 @@
 import * as React from 'react';
-
-var BizCard = React.createClass(
-
+import { Link } from 'react-router';
 class BizCard extends React.Component {
 
-  initializeState() {
-    this.setState({
-      name:
-      snippet:
-      img_url:
-    });
-  }
-
-  const { name , snippet, } = this.props;
-  const { snippet } = this.props;
-  const {img_url} = this.props;
-
-  componentWillMount() {
-    this.initializeState();
-    this.getBusinesses();
-  }
-
-
-  //get businesses from database
-  getBusinesses() {
-    this.startLoading();
-    axios.get('/api/businesses')
-    .then((response) =>{
-      console.log('response', response);
-      this.endLoading();
-      this.setState({
-        businesses: response.data
-      });
-      console.log('businesses array', this.state.businesses)
-    })
-    .catch(() => {
-      console.log('error', error);
-      this.endLoading();
-    });
-  }
-
-
-  handleUpdateTextInput(event) {
-    const newState = {};
-    newState[event.target.id] = event.target.value;
-    this.setState(newState);
-  }
-
-  handleSubmit(event) {
-    //prevent submit from refreshing the page
-    event.preventDefault();
-    console.log('Save', this.state);
-    this.props.submitAction(this.state);
-  }
-
-  startLoading() {
-        this.setState({
-          loading: true
-        })
-    }
-
-    endLoading() {
-      this.setState({
-        loading: false
-      });
-    }
-
   render() {
-
+    let {img_url, name, snippet, _id} = this.props.bizData;
+    let default_image = "http://unforgettablewebdesigns.com/wp-content/plugins/testimonial/assets/frontend/css/images/placeholder.png"
     return (
-      <div>
-        <div class="row">
-          <div class="col-md-4">
-              <img class="biz-thumbnails" src={img_url} alt="" height="225" width="225"/>
+      <div className = {this.props.index % 2 === 0 ? "bizCard" : "bizCard odd"}>
+        <div className="row">
+          <div className="col-md-4">
+              <img className="biz-thumbnails" src={img_url ? img_url : default_image} alt="" height="225" width="225"/>
           </div>
-          <div class="col-md-8">
-            <h4>{name}</h4>
+          <div className="col-md-8">
+            <h4><Link to={`/biz/${_id}`} >{name}</Link></h4>
             <p>{snippet}</p>
-            <a class="btn btn-default" href="#">More Info</a>
+            <a className="btn btn-default" href="#">More Info</a>
           </div>
-      </div>
-      <div class="empty">
       </div>
     </div>
     );
   }
 }
+
+// BizCard.propTypes = {
+//   //our biz card takes in a prop that is an object
+//   bizData: React.PropTypes.object
+// }
+
+export {BizCard};

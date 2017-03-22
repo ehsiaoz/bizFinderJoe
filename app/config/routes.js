@@ -11,7 +11,7 @@ const router = (
     <Route path="/" component={Layout}>
       <Route path="/cms" component={Cms} />
       <Route path="/search/:category(/:location)" component={Results} />
-      <Route path="/biz/:id" component={Listing} />
+      <Route path="/biz/:id" component={Listing}  />
       <IndexRoute component={Home} />
     </Route>
   </Router>

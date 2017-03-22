@@ -1,5 +1,6 @@
 @import '../../node_modules/antd/dist/antd.css';
 @import 'components/main.css';
+@import 'components/bizCard.css';
 @import 'components/header.css';
 @import 'components/footer.css';
 @import 'components/form.css';

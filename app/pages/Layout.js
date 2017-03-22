@@ -3,6 +3,13 @@ import { Header } from '../components/Layout/Header';
 import { Footer } from '../components/Layout/Footer';
 
 class Layout extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      bizLookup: {},
+      businesses: []
+    }
+  }
   render() {
     return (
       <div>

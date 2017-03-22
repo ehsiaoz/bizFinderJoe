@@ -51,7 +51,8 @@ class BizList extends React.Component {
 
   render() {
     const bizList = this.state.businesses.map((item, i)=> {
-      return <li key={i}>{item.name}</li>
+      return <li key={i}>{item.name}/></li>
+
     })
     return (
       <div>

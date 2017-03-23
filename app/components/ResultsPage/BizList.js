@@ -2,12 +2,12 @@ import * as React from 'react';
 import * as axios from 'axios';
 import {BizCard } from './BizCard';
 
-const generateBizIndex = (bizArray) => {
-  return bizArray.reduce((ob, biz, i) => {
-    ob[biz._id] = biz;
-    return ob;
-  }, {})
-}
+// const generateBizIndex = (bizArray) => {
+//   return bizArray.reduce((ob, biz, i) => {
+//     ob[biz._id] = biz;
+//     return ob;
+//   }, {})
+// }
 
 class BizList extends React.Component {
   //react lifecycle functions
@@ -36,7 +36,7 @@ class BizList extends React.Component {
       self.endLoading();
       self.setState({
         businesses: response.data,
-        bizLookup: generateBizIndex(response.data)
+        // bizLookup: generateBizIndex(response.data)
       });
       console.log('businesses array', this.state.businesses)
     })

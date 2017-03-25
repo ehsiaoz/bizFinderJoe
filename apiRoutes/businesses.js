@@ -4,12 +4,32 @@ var router = express.Router();
 
 //GET route returning ALL businesses
 router.get('/businesses', function(req, res) {
-  Business.find(function(err, businesses) {
-    if (err) {
-      return res.send(err);
-    }
-    res.json(businesses);
-  });
+  //?location='chicago'&category='hotel'
+  var location = req.query.location;
+  var category = req.query.category;
+
+  if (req.query.location && req.query.category){
+
+    Business.find({
+      location: location,
+      category: category
+    },function(err, businesses) {
+      if (err) {
+        return res.send(err);
+      }
+      res.json(businesses);
+    });
+  }
+  else {
+    //in null or undefined class
+    Business.find(function(err, businesses) {
+      if (err) {
+        return res.send(err);
+      }
+      res.json(businesses);
+    });
+  }
+
 });
 
 //FROM JOE's example app-form-post

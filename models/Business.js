@@ -43,7 +43,11 @@ var BusinessSchema = new Schema({
   offers: [{
     type: Schema.Types.ObjectId,
     ref: "Offer"
-  }]
+  }],
+  location: {
+    lat: Number,
+    lng: Number
+  }
 });
 
 var Business = mongoose.model('Business', BusinessSchema);

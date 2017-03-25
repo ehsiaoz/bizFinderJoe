@@ -7,6 +7,8 @@ class Map extends Component {
   render() {
     const mapContainer = <div style={{height: '100%', width:'100%'}}></div>
 
+    console.log("this.props.markers", this.props.markers)
+
     const markers = this.props.markers.map((biz, i) => {
 
         const marker = {
@@ -25,7 +27,7 @@ class Map extends Component {
         containerElement = { mapContainer }
         googleMapElement = {
           <GoogleMap
-            defaultZoom={15}
+            defaultZoom={14}
             defaultCenter={this.props.center}
             options={{streetViewControl: false, mapTypeControl: false}}>
             { markers }

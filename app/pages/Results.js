@@ -15,19 +15,24 @@ class Results extends React.Component {
        },
        markers: [
          {
-           location:{
+           location: {
              lat: 40.7599,
              lng: -73.9803
-           },
-           location:{
+           }
+         },
+         {
+           location: {
              lat: 40.7651,
              lng: -73.9799
-           },
-           location:{
+           }
+         },
+         {
+           location: {
              lat: 40.7505,
              lng: -73.9934
            }
-         }]
+         }
+       ]
      }
   }
 

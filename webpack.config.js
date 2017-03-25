@@ -5,9 +5,10 @@ module.exports = {
 
   // The plain compiled JavaScript will be output into this file
   output: {
-    filename: "public/bundle.js"
+    filename: "public/bundle.js",
+    sourceMapFilename: "public/build.map"
   },
-
+  devtool: '#source-map',
   // This section desribes the transformations we will perform
   module: {
     loaders: [

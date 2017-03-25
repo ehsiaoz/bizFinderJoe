@@ -3,6 +3,7 @@ import * as axios from 'axios';
 import { H1 } from '../components/Layout/H1';
 import { Breadcrumbs } from '../components/Layout/Breadcrumbs';
 import { BizDetails } from '../components/ListingPage/BizDetails';
+import { Map } from '../components/ResultsPage/Map';
 
 class Listing extends React.Component {
 
@@ -10,8 +11,18 @@ class Listing extends React.Component {
      super(props);
      this.state ={
        id: this.props.routeParams.id,
-       biz: {}
-
+       biz: {},
+       location: {
+         lat: 40.75,
+         lng: -73.98
+       },
+       markers: [
+         {
+           location:{
+             lat: 40.75,
+             lng:-73.98
+           }
+         }]
      }
   }
 
@@ -39,6 +50,7 @@ class Listing extends React.Component {
     });
   }
 
+
   render() {
   //  let {biz} = this.props
     console.log('Listing component',this.props )
@@ -54,7 +66,9 @@ class Listing extends React.Component {
               <BizDetails biz={this.state.biz}/>
             </div>
             <div className="col-md-6">
-              Map
+              <div style={{width:300, height:300, background: 'red'}}>
+                <Map center={this.state.location} markers={this.state.markers} />
+              </div>
             </div>
           </div>
           <div className="col-md-4">

@@ -14,11 +14,11 @@
     "axios": "^0.15.3",
     "body-parser": "^1.17.1",
     "express": "^4.15.2",
-    "mongoose": "^4.9.0",
+    "mongoose": "*",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
-    "react-router": "^2.4.1",
-    "mongoose": "*"
+    "react-google-maps": "^4.11.0",
+    "react-router": "^2.4.1"
   },
   "devDependencies": {
     "babel-core": "^6.3.13",

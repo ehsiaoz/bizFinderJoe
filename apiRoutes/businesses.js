@@ -4,15 +4,15 @@ var router = express.Router();
 
 //GET route returning ALL businesses
 router.get('/businesses', function(req, res) {
-  //?location='chicago'&category='hotel'
-  var location = req.query.location;
-  var category = req.query.category;
 
-  if (req.query.location && req.query.category){
+
+  var city = req.query.city;
+  console.log("city in route", city);
+
+  if (city){
 
     Business.find({
-      location: location,
-      category: category
+      city: city
     },function(err, businesses) {
       if (err) {
         return res.send(err);

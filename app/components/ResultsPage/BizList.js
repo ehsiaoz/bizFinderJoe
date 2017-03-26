@@ -14,6 +14,8 @@ class BizList extends React.Component {
   constructor(props) {
      super(props);
      this.state ={
+       city: this.props.city,
+       category: this.props.category,
        bizLookup: {},
        businesses: [],
        loading: false
@@ -22,17 +24,29 @@ class BizList extends React.Component {
 
   componentWillMount() {
     this.getBusinesses();
+
   }
 
+  // getParams () {
+  //   this.setState({
+  //     city: this.props.city,
+  //     category: this.props.category
+  //   })
+  // }
 
   //get businesses from database
   getBusinesses() {
     this.startLoading();
     let self = this;
 
-    axios.get('/api/businesses')
+    axios.get('/api/businesses', {
+      params: {
+        city: this.state.city,
+        category: this.state.category
+      }
+    })
     .then((response) => {
-      console.log('response', response);
+      console.log('response from axios get', response.data);
       self.endLoading();
       self.setState({
         businesses: response.data,

@@ -1,31 +1,33 @@
 import * as React from 'react';
+import * as axios from 'axios';
 import { Button } from 'antd';
 
 class BizForm extends React.Component {
   //react lifecycle functions
 
-  initializeState() {
-    this.setState({
-      name: '',
-      street_address: '',
-      city: '',
-      state: '',
-      zipcode: '',
-      website_url: '',
-      fb_url: '',
-      phone: '',
-      email: '',
-      first_name: '',
-      last_name: '',
-      thumbnail_url: '',
-      desc_snippet: '',
-      desc_overview: '',
-      categories: [],
-    });
+  constructor(props) {
+     super(props);
+     this.state ={
+       name: '',
+       street_address: '',
+       city: '',
+       state: '',
+       zipcode: '',
+       website_url: '',
+       fb_url: '',
+       phone: '',
+       email: '',
+       first_name: '',
+       last_name: '',
+       thumbnail_url: '',
+       desc_snippet: '',
+       desc_overview: '',
+       categories: [],
+     }
   }
 
   componentWillMount() {
-    this.initializeState();
+    this.getCategories()
   }
 
   // handleUpdateTitle(event) {
@@ -43,7 +45,19 @@ class BizForm extends React.Component {
 
   //get categories to allow user to select from dropdown
   getCategories() {
+    let self = this;
+    axios.get('/api/categories')
+    .then((response) => {
+      console.log('response from axios get', response.data);
 
+      self.setState({
+        categories: response.data,
+        // bizLookup: generateBizIndex(response.data)
+      });
+    })
+    .catch((error) => {
+      console.log('error', error);
+    });
   }
 
   handleUpdateTextInput(event) {
@@ -67,6 +81,7 @@ class BizForm extends React.Component {
   }
 
   render() {
+    console.log('categories', this.state.categories)
     return (
       <div>
         <form onSubmit={(event) => this.handleSubmit(event)}>

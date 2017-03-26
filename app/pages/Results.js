@@ -9,6 +9,8 @@ class Results extends React.Component {
   constructor(props) {
      super(props);
      this.state ={
+       city: '',
+       category: '',
        mapCenter: {
          lat: 40.75,
          lng: -73.98
@@ -36,12 +38,22 @@ class Results extends React.Component {
      }
   }
 
+  componentWillMount () {
+    this.getParams()
+  }
+
+  getParams () {
+    this.setState({
+      city: this.props.location.query.city,
+      category: this.props.location.query.category
+    })
+  }
+
   render() {
 
     console.log('this.props Results', this.props)
-    const { query } = this.props.location;
-    const { date, filter } = query;
-    console.log("date ", date);
+    console.log("city in results ", this.state.city);
+    console.log("category in results", this.state.category);
   //  let {setParent, appstate} = this.props;
     return (
       <div>
@@ -54,7 +66,7 @@ class Results extends React.Component {
             </div>
           </div>
           <div className="col-md-7">
-            <BizList  />
+            <BizList city={this.state.city} category={this.state.category} />
           </div>
         </div>
       </div>

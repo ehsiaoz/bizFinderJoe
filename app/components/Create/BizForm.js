@@ -2,12 +2,14 @@ import * as React from 'react';
 import * as axios from 'axios';
 import { Button } from 'antd';
 
+
 class BizForm extends React.Component {
   //react lifecycle functions
 
   constructor(props) {
      super(props);
      this.state ={
+       categoryList: [],
        name: '',
        street_address: '',
        city: '',
@@ -22,7 +24,7 @@ class BizForm extends React.Component {
        thumbnail_url: '',
        desc_snippet: '',
        desc_overview: '',
-       categories: [],
+       category: '',
      }
   }
 
@@ -51,7 +53,7 @@ class BizForm extends React.Component {
       console.log('response from axios get', response.data);
 
       self.setState({
-        categories: response.data,
+        categoryList: response.data,
         // bizLookup: generateBizIndex(response.data)
       });
     })
@@ -66,6 +68,12 @@ class BizForm extends React.Component {
     this.setState(newState);
   }
 
+  handleSelect(event) {
+    this.setState({
+      category: event.target.value
+    })
+  }
+
   handleSubmit(event) {
     //prevent submit from refreshing the page
     event.preventDefault();
@@ -73,18 +81,26 @@ class BizForm extends React.Component {
     this.props.submitAction(this.state);
   }
 
-  renderLoading() {
-    if(this.props.loading) {
-      <p>loading..</p>
-    }
-
-  }
 
   render() {
-    console.log('categories', this.state.categories)
+    const categoryList = this.state.categoryList.map((item, i)=> {
+      return <option key={i} value={item._id}>{item.name}</option>
+    })
     return (
       <div>
+
         <form onSubmit={(event) => this.handleSubmit(event)}>
+
+          <div className='form-row'>
+            <label htmlFor='category'>Category</label><br/>
+            <select
+              id='category'
+              onChange={(event) => this.handleSelect(event)}>
+              <option defaultValue> -- select a category -- </option>
+              {categoryList}
+            </select>
+          </div>
+
           <div className='form-row'>
             <label htmlFor='name'>Business Name</label><br/>
             <input
@@ -113,6 +129,9 @@ class BizForm extends React.Component {
               onChange={(event) => this.handleUpdateTextInput(event)}
             />
           </div>
+
+
+
 
           <div className='form-row'>
             <label htmlFor='state'>State</label><br/>
@@ -209,16 +228,6 @@ class BizForm extends React.Component {
             <input
               type='text'
               id='desc_overview'
-              onChange={(event) => this.handleUpdateTextInput(event)}
-            />
-          </div>
-
-          <div className='form-row'>
-            <label htmlFor='categories'>Category</label><br/>
-            <input
-              defaultValue={this.state.category}
-              type='text'
-              id='categories'
               onChange={(event) => this.handleUpdateTextInput(event)}
             />
           </div>

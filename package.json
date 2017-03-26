@@ -17,8 +17,11 @@
     "mongoose": "*",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
+    "react-google-autocomplete": "^1.0.12",
     "react-google-maps": "^4.11.0",
-    "react-router": "^2.4.1"
+    "react-places-autocomplete": "^4.1.1",
+    "react-router": "^2.4.1",
+    "vue-google-autocomplete": "^1.0.5"
   },
   "devDependencies": {
     "babel-core": "^6.3.13",

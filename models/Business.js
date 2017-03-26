@@ -32,10 +32,10 @@ var BusinessSchema = new Schema({
   desc_overview: String,
   desc_notes: Array,
   photo_count: Number,
-  categories: [{
+  category: {
     type: Schema.Types.ObjectId,
     ref: "Category"
-  }],
+  },
   profile_complete: Boolean,
   has_Snippet: Boolean,
   has_thumbnail: Boolean,

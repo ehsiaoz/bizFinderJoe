@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as axios from 'axios';
 import { Button } from 'antd';
-
+import Autocomplete from 'react-google-autocomplete';
 
 class BizForm extends React.Component {
   //react lifecycle functions
@@ -11,6 +11,7 @@ class BizForm extends React.Component {
      this.state ={
        categoryList: [],
        name: '',
+       formatted_address: '',
        street_address: '',
        city: '',
        state: '',
@@ -25,6 +26,10 @@ class BizForm extends React.Component {
        desc_snippet: '',
        desc_overview: '',
        category: '',
+       location: {
+         lat: null,
+         lng: null,
+       }
      }
   }
 
@@ -77,8 +82,43 @@ class BizForm extends React.Component {
   handleSubmit(event) {
     //prevent submit from refreshing the page
     event.preventDefault();
+    this.getGeoCode();
     console.log('Save', this.state);
     this.props.submitAction(this.state);
+  }
+
+  getGeoCode(event) {
+    let self = this;
+    const address_string = this.state.street_address + '+' + this.state.city + '+' + this.state.state;
+    console.log('address_string: ', address_string);
+    axios.get('https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyB2YjPzqYIuEbcLnKcE27KwdJyNDqd0cPE&address=' + address_string)
+      .then(function(response){
+        const formatted_address = response.data.results[0].formatted_address;
+        const street_address = response.data.results[0].address_components[0].long_name + ' ' + response.data.results[0].address_components[1].short_name;
+        const city = response.data.results[0].address_components[3].long_name;
+        const state = response.data.results[0].address_components[5].short_name;
+        const zipcode = response.data.results[0].address_components[7].short_name
+        const location = {
+          lat: response.data.results[0].geometry.location.lat,
+          lng: response.data.results[0].geometry.location.lng
+        }
+        console.log('formatted_address: ', formatted_address);
+        console.log('street_address ', street_address);
+        console.log('location ', location);
+        console.log(response.data);
+        console.log(response.status); // ex.: 200
+        self.setState({
+          formatted_address: formatted_address,
+          street_address: street_address,
+          city: city,
+          state: state,
+          zipcode: zipcode,
+          location: location
+        })
+      })
+      .catch((error) => {
+        console.log('error', error);
+      });
   }
 
 
@@ -88,6 +128,50 @@ class BizForm extends React.Component {
     })
     return (
       <div>
+
+        <form>
+          <div className='form-row'>
+            <label htmlFor='street_address'>Street Address</label><br/>
+            <input
+              required
+              type='text'
+              id='street_address'
+              onChange={(event) => this.handleUpdateTextInput(event)}
+            />
+          </div>
+
+          <div className='form-row'>
+            <label htmlFor='cityState'>City, State</label><br/>
+            <Autocomplete
+                style={{width: '50%'}}
+                onPlaceSelected={(place) => {
+                  console.log(place);
+                  this.setState({
+                    city: place.address_components[0].long_name,
+                    state: place.address_components[2].short_name
+                  });
+                }}
+                types={['(cities)']}
+                componentRestrictions={{country: "us"}}
+            />
+          </div>
+          <div className='form-row'>
+            <Button
+              type='primary'
+              htmlType='button'
+              onClick={(event) => this.getGeoCode(event)}
+              >
+              Lookup
+            </Button>
+          </div>
+        </form>
+
+        <h4>Biz Details</h4>
+        <div>
+          formatted_address: {this.state.formatted_address} <br/>
+          city: {this.state.city} <br/>
+          state: {this.state.state} <br/>
+        </div>
 
         <form onSubmit={(event) => this.handleSubmit(event)}>
 
@@ -104,49 +188,11 @@ class BizForm extends React.Component {
           <div className='form-row'>
             <label htmlFor='name'>Business Name</label><br/>
             <input
+              required
               defaultValue={this.state.bizName}
               type = 'text'
               id='name'
               //you pass in a function definition not a called function in onChange i.e. this.handlUpdateTitle.bind(this)
-              onChange={(event) => this.handleUpdateTextInput(event)}
-            />
-          </div>
-
-          <div className='form-row'>
-            <label htmlFor='street_address'>Street Address</label><br/>
-            <input
-              type='text'
-              id='street_address'
-              onChange={(event) => this.handleUpdateTextInput(event)}
-            />
-          </div>
-
-          <div className='form-row'>
-            <label htmlFor='city'>City</label><br/>
-            <input
-              type='text'
-              id='city'
-              onChange={(event) => this.handleUpdateTextInput(event)}
-            />
-          </div>
-
-
-
-
-          <div className='form-row'>
-            <label htmlFor='state'>State</label><br/>
-            <input
-              type='text'
-              id='state'
-              onChange={(event) => this.handleUpdateTextInput(event)}
-            />
-          </div>
-
-          <div className='form-row'>
-            <label htmlFor='zipcode'>Zipcode</label><br/>
-            <input
-              type='text'
-              id='zipcode'
               onChange={(event) => this.handleUpdateTextInput(event)}
             />
           </div>

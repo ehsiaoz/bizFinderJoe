@@ -15,6 +15,7 @@ class Results extends React.Component {
          lat: 40.75,
          lng: -73.98
        },
+       businesses: [],
        markers: [
          {
            location: {
@@ -49,6 +50,14 @@ class Results extends React.Component {
     })
   }
 
+  setParent(newBusinesses) {
+    console.log("newBusinesses in setParent", newBusinesses);
+    this.setState({
+      businesses: newBusinesses
+    });
+    console.log("this.state.businesses after returned from child", this.state.businesses);
+  }
+
   render() {
 
     console.log('this.props Results', this.props)
@@ -66,7 +75,7 @@ class Results extends React.Component {
             </div>
           </div>
           <div className="col-md-7">
-            <BizList city={this.state.city} category={this.state.category} />
+            <BizList city={this.state.city} category={this.state.category} setParent={this.setParent}/>
           </div>
         </div>
       </div>

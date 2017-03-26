@@ -14,7 +14,7 @@ router.get('/categories', function(req, res) {
 
 //POST route to create a new category
 router.post('/categories', function(req, res) {
-
+  console.log('this is req', req);
   var category = new Category(req.body);
 
   category.save(function(err, doc) {

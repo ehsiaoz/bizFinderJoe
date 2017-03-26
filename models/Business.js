@@ -6,6 +6,7 @@ var BusinessSchema = new Schema({
     type: String,
     required: true
   },
+  formatted_address: String,
   street_address: String,
   city: {
     type: String,

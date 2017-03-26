@@ -16,7 +16,6 @@ class BizList extends React.Component {
      this.state ={
        city: this.props.city,
        category: this.props.category,
-       bizLookup: {},
        businesses: [],
        loading: false
      }
@@ -50,8 +49,8 @@ class BizList extends React.Component {
       self.endLoading();
       self.setState({
         businesses: response.data,
-        // bizLookup: generateBizIndex(response.data)
       });
+      this.props.setParent(this.state.businesses);
       console.log('businesses array', this.state.businesses)
     })
     .catch((error) => {
@@ -75,7 +74,7 @@ class BizList extends React.Component {
 
 
   render() {
-    console.log('this.state in bizlist', this.state)
+    console.log('this.state in render bizlist', this.state)
     console.log('this.props in bizlist', this.props)
       //let {setParent, appstate} = this.props;
     const bizList = this.state.businesses.map((item, i)=> {

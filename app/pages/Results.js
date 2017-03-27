@@ -52,6 +52,7 @@ class Results extends React.Component {
 
   setParent(newBusinesses) {
     console.log("newBusinesses in setParent", newBusinesses);
+    console.log(this);
     this.setState({
       businesses: newBusinesses
     });
@@ -75,7 +76,7 @@ class Results extends React.Component {
             </div>
           </div>
           <div className="col-md-7">
-            <BizList city={this.state.city} category={this.state.category} setParent={this.setParent}/>
+            <BizList city={this.state.city} category={this.state.category} setParent={this.setParent.bind(this)}/>
           </div>
         </div>
       </div>

@@ -24,7 +24,7 @@ class Header extends React.Component {
               </select>
               </div>
               <div className="form-group">
-                <Autocomplete className="form-control"
+                <Autocomplete className="form-control autocomplete"
                     style={{width: '100%'}}
                     onPlaceSelected={(place) => {
                       console.log(place);

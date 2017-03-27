@@ -1,6 +1,7 @@
 /*global header*/
 .navbar-fixed-top {
   background-color: green;
+  z-index: 1000
 }
 
 /*global header right justified links*/
@@ -15,10 +16,6 @@
     background-color: green;
 }
 
-.navbar .navbar-search .dropdown-menu { min-width: 25px; }
-.dropdown-menu .label-icon { margin-left: 5px; }
-.btn-outline {
-    background-color: transparent;
-    color: inherit;
-    transition: all .5s;
+.autocomplete {
+  z-index: 1001
 }

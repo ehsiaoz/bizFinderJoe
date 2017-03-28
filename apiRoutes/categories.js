@@ -4,6 +4,9 @@ var router = express.Router();
 
 //GET route returning ALL categories
 router.get('/categories', function(req, res) {
+
+  
+
   Category.find(function(err, categories) {
     if (err) {
       return res.send(err);

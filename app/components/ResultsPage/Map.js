@@ -24,7 +24,6 @@ class Map extends Component {
 
     return (
 
-      <div style={{width:"100%", height:800, background: 'red'}}>
       <GoogleMapLoader
         containerElement = { mapContainer }
         googleMapElement = {
@@ -35,7 +34,7 @@ class Map extends Component {
             { markers }
           </GoogleMap>
         } />
-      </div>
+
     )
   }
 }

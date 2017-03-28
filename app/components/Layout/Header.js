@@ -38,14 +38,21 @@ class Header extends React.Component {
     var e = document.getElementById("category");
     console.log(e.options[e.selectedIndex].text);
     this.setState({
-      category: event.target.value
+      category: e.options[e.selectedIndex].text
     })
-    console.log("Category Selected: ", this.state.category)
+  }
+
+  redirectToSearch() {
+    var pathString = '/search?city=' + this.state.city + '&category=' + this.state.category;
+    console.log('pathString', pathString)
+    this.context.router.push(pathString);
+    window.location.reload();
   }
 
   handleSubmit(event) {
     event.preventDefault();
-    this.props.submitAction(this.state);
+    var city = this.state.city;
+    this.redirectToSearch()
   }
 
   render() {

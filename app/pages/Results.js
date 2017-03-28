@@ -1,4 +1,5 @@
 import * as React from 'react';
+import * as axios from 'axios';
 import { BizList } from '../components/ResultsPage/BizList';
 import { Map } from '../components/ResultsPage/Map';
 import { H1 } from '../components/Layout/H1';
@@ -11,6 +12,7 @@ class Results extends React.Component {
      this.state ={
        city: '',
        category: '',
+       categoryValue: '',
        mapCenter: {
          lat: 41.8920457,
          lng: -87.6472265
@@ -29,6 +31,11 @@ class Results extends React.Component {
       city: this.props.location.query.city,
       category: this.props.location.query.category
     })
+  }
+
+  getCategoryValue() {
+    var category = this.state.category;
+
   }
 
   setParent(newBusinesses) {
@@ -64,9 +71,9 @@ class Results extends React.Component {
         <H1 />
         <div className="row">
           <div className="col-md-5">
-
+            <div style={{width:"100%", height:800, background: 'red'}}>
               <Map center={this.state.mapCenter} markers={this.state.markers} />
-          
+            </div>
           </div>
           <div className="col-md-7">
             <BizList city={this.state.city} category={this.state.category} setParent={this.setParent.bind(this)}/>

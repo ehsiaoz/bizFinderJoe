@@ -8,7 +8,9 @@ class Header extends React.Component {
   constructor(props) {
      super(props);
      this.state ={
-       categoryList: []
+       categoryList: [],
+       category: '',
+       city: ''
      }
   }
 
@@ -32,6 +34,19 @@ class Header extends React.Component {
     });
   }
 
+  handleSelect(event) {
+    var e = document.getElementById("category");
+    console.log(e.options[e.selectedIndex].text);
+    this.setState({
+      category: event.target.value
+    })
+    console.log("Category Selected: ", this.state.category)
+  }
+
+  handleSubmit(event) {
+    event.preventDefault();
+    this.props.submitAction(this.state);
+  }
 
   render() {
 
@@ -47,9 +62,14 @@ class Header extends React.Component {
             <a className="navbar-brand" href="#" style={{color: 'white'}}>Biz Finder
             </a>
             {/* top global search form */}
-            <form className="navbar-form navbar-left">
+            <form className="navbar-form navbar-left"
+            onSubmit = {(event) => this.handleSubmit(event)}
+            >
               <div className="form-group">
-              <select className="form-control" name="cars">
+              <select className="form-control"
+              id="category"
+              onChange = {(event) => this.handleSelect(event)}
+              >
               <option defaultValue> -- select a category -- </option>
               {categoryList}
               </select>
@@ -58,12 +78,11 @@ class Header extends React.Component {
                 <Autocomplete className="form-control autocomplete"
                     style={{width: '100%'}}
                     onPlaceSelected={(place) => {
-                      console.log(place);
                       this.setState({
-                        city: place.address_components[0].long_name,
-                        state: place.address_components[2].short_name
+                        city: place.address_components[0].long_name
                       });
                     }}
+
                     types={['(cities)']}
                     componentRestrictions={{country: "us"}}
                 />
@@ -86,5 +105,8 @@ class Header extends React.Component {
   }
 }
 
+Header.contextTypes = {
+  router: React.PropTypes.any
+};
 
 export { Header };

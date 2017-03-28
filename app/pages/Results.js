@@ -64,9 +64,9 @@ class Results extends React.Component {
         <H1 />
         <div className="row">
           <div className="col-md-5">
-            <div style={{width:400, height:800, background: 'red'}}>
+
               <Map center={this.state.mapCenter} markers={this.state.markers} />
-            </div>
+          
           </div>
           <div className="col-md-7">
             <BizList city={this.state.city} category={this.state.category} setParent={this.setParent.bind(this)}/>

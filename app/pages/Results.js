@@ -12,30 +12,11 @@ class Results extends React.Component {
        city: '',
        category: '',
        mapCenter: {
-         lat: 40.75,
-         lng: -73.98
+         lat: 41.8920457,
+         lng: -87.6472265
        },
        businesses: [],
-       markers: [
-         {
-           location: {
-             lat: 40.7599,
-             lng: -73.9803
-           }
-         },
-         {
-           location: {
-             lat: 40.7651,
-             lng: -73.9799
-           }
-         },
-         {
-           location: {
-             lat: 40.7505,
-             lng: -73.9934
-           }
-         }
-       ]
+       markers: []
      }
   }
 
@@ -51,18 +32,30 @@ class Results extends React.Component {
   }
 
   setParent(newBusinesses) {
-    console.log("newBusinesses in setParent", newBusinesses);
-    console.log(this);
     this.setState({
       businesses: newBusinesses
     });
-    console.log("this.state.businesses after returned from child", this.state.businesses);
+    this.setMapMarkers(this.state.businesses);
+
+  }
+
+  setMapMarkers(businesses) {
+    // businesses.map((item, i) => {
+
+    var markers = businesses.map((item, i) => {
+      return {location: {
+                  lat: item.location.lat,
+                  lng: item.location.lng}
+              }
+    })
+
+    this.setState({
+      markers: markers
+    })
   }
 
   render() {
-
-    console.log('this.props Results', this.props)
-    console.log("city in results ", this.state.city);
+    console.log('this.state.markers: ', this.state.markers);
     console.log("category in results", this.state.category);
   //  let {setParent, appstate} = this.props;
     return (

@@ -1,10 +1,44 @@
 import * as React from 'react';
+import * as axios from 'axios';
 import { Link } from 'react-router';
 import Autocomplete from 'react-google-autocomplete';
 
 class Header extends React.Component {
 
+  constructor(props) {
+     super(props);
+     this.state ={
+       categoryList: []
+     }
+  }
+
+  componentWillMount() {
+    this.getCategories()
+  }
+
+  getCategories() {
+    let self = this;
+    axios.get('/api/categories')
+    .then((response) => {
+      console.log('response from axios get', response.data);
+
+      self.setState({
+        categoryList: response.data,
+        // bizLookup: generateBizIndex(response.data)
+      });
+    })
+    .catch((error) => {
+      console.log('error', error);
+    });
+  }
+
+
   render() {
+
+    const categoryList = this.state.categoryList.map((item, i)=> {
+      return <option key={i} value={item._id}>{item.name}</option>
+    })
+
     return (
       <div>
         <nav className="navbar navbar-fixed-top" role="banner">
@@ -17,10 +51,7 @@ class Header extends React.Component {
               <div className="form-group">
               <select className="form-control" name="cars">
               <option defaultValue> -- select a category -- </option>
-              <option value="volvo">Volvo</option>
-              <option value="saab">Saab</option>
-              <option value="fiat">Fiat</option>
-              <option value="audi">Audi</option>
+              {categoryList}
               </select>
               </div>
               <div className="form-group">

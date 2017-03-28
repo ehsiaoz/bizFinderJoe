@@ -23,7 +23,6 @@ class BizList extends React.Component {
 
   componentWillMount() {
     this.getBusinesses();
-
   }
 
   // getParams () {

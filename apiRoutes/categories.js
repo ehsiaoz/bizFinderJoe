@@ -5,14 +5,27 @@ var router = express.Router();
 //GET route returning ALL categories
 router.get('/categories', function(req, res) {
 
-  
+  var category = req.query.category;
+  console.log('category in route: ', category);
+  if (category){
 
-  Category.find(function(err, categories) {
-    if (err) {
-      return res.send(err);
-    }
-    res.json(categories);
-  });
+    Category.find({
+      name: category
+    }, function(err, categories) {
+      if (err) {
+        return res.send(err);
+      }
+      res.json(categories);
+    });
+  }
+  else {
+    Category.find(function(err, categories) {
+      if (err) {
+        return res.send(err);
+      }
+      res.json(categories);
+    });
+  }
 });
 
 //POST route to create a new category

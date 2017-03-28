@@ -23,10 +23,12 @@ class Results extends React.Component {
   }
 
   componentWillMount () {
-    this.getParams()
+    this.getParams();
+    this.getCategoryValue()
   }
 
   getParams () {
+    console.log("getParamsFunction")
     this.setState({
       city: this.props.location.query.city,
       category: this.props.location.query.category
@@ -34,8 +36,26 @@ class Results extends React.Component {
   }
 
   getCategoryValue() {
-    var category = this.state.category;
 
+    let self = this;
+    var category = this.props.location.query.category;
+    console.log("category inside getCategoryValue", category);
+    axios.get('/api/categories', {
+      params: {
+        category: this.props.location.query.category
+      }
+    })
+    .then((response) => {
+      console.log('response from axios get', response.data);
+
+      self.setState({
+        businesses: response.data,
+      });
+    })
+    .catch((error) => {
+      console.log('error', error);
+
+    });
   }
 
   setParent(newBusinesses) {

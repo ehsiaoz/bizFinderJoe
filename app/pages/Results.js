@@ -86,8 +86,7 @@ class Results extends React.Component {
     return (
       <div>
         <Breadcrumbs />
-        <H1 />
-        {this.state.categoryValue}
+        <H1 city={this.state.city} category={this.state.category} />
         <div className="row">
           <div className="col-md-5">
             <div style={{width:"100%", height:800, background: 'red'}}>

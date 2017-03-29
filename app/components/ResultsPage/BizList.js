@@ -42,7 +42,7 @@ class BizList extends React.Component {
     axios.get('/api/businesses', {
       params: {
         city: this.state.city,
-        // category: this.state.categoryValue
+        category: this.state.category
       }
     })
     .then((response) => {

@@ -44,9 +44,9 @@ class Header extends React.Component {
 
   redirectToSearch() {
     var pathString = '/search?city=' + this.state.city + '&category=' + this.state.category;
-    
+
     this.context.router.push(pathString);
-    // window.location.reload();
+    window.location.reload();
   }
 
   handleSubmit(event) {

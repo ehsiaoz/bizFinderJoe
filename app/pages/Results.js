@@ -14,8 +14,8 @@ class Results extends React.Component {
        category: '',
        categoryValue: '',
        mapCenter: {
-         lat: 41.8920457,
-         lng: -87.6472265
+         lat:30.2484381,
+         lng:-97.7503308
        },
        businesses: [],
        markers: []
@@ -24,7 +24,8 @@ class Results extends React.Component {
 
   componentWillMount () {
     this.getParams();
-    this.getCategoryValue()
+    // this.getCategoryValue();
+
   }
 
   getParams () {
@@ -33,28 +34,30 @@ class Results extends React.Component {
       city: this.props.location.query.city,
       category: this.props.location.query.category
     })
+
+    this.setMapCenter()
   }
 
-  getCategoryValue() {
-
-    let self = this;
-    var category = this.props.location.query.category;
-    console.log("category inside getCategoryValue", category);
-    axios.get('/api/categories', {
-      params: {
-        category: this.props.location.query.category
-      }
-    })
-    .then((response) => {
-
-      self.setState({
-        categoryValue: response.data[0]._id,
-      });
-    })
-    .catch((error) => {
-      console.log('error', error);
-    });
-  }
+  // getCategoryValue() {
+  //
+  //   let self = this;
+  //   var category = this.props.location.query.category;
+  //   console.log("category inside getCategoryValue", category);
+  //   axios.get('/api/categories', {
+  //     params: {
+  //       category: this.props.location.query.category
+  //     }
+  //   })
+  //   .then((response) => {
+  //     console.log("getcategoryvalue: ",response);
+  //     self.setState({
+  //       categoryValue: response.data[0]._id,
+  //     });
+  //   })
+  //   .catch((error) => {
+  //     console.log('error', error);
+  //   });
+  // }
 
   setParent(newBusinesses) {
     this.setState({
@@ -73,16 +76,38 @@ class Results extends React.Component {
                   lng: item.location.lng}
               }
     })
-
     this.setState({
       markers: markers
     })
   }
 
-  render() {
+  setMapCenter() {
+    let self = this;
+    var city = this.state.city;
+    axios.get('https://maps.googleapis.com/maps/api/geocode/json?address=' + {city} + '&key=AIzaSyB2YjPzqYIuEbcLnKcE27KwdJyNDqd0cPE')
+    .then(function (response) {
 
-    console.log("categoryValue in results", this.state.categoryValue);
-  //  let {setParent, appstate} = this.props;
+      var lat = parseFloat(response.data.results[0].geometry.location.lat);
+      var lng = parseFloat(response.data.results[0].geometry.location.lng);
+      console.log('parselat', lat);
+      console.log('parselng', lng);
+      var center = {
+          lat: lat,
+          lng: lng
+        };
+      console.log('center', center);
+      self.setState({
+        mapCenter: center
+      })
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  }
+
+
+  render() {
+    console.log('mapCenter in render', this.state.mapCenter);
     return (
       <div>
         <Breadcrumbs />
@@ -94,7 +119,7 @@ class Results extends React.Component {
             </div>
           </div>
           <div className="col-md-7">
-            <BizList city={this.state.city} category={this.state.category} categoryValue={this.state.categoryValue} setParent={this.setParent.bind(this)}/>
+            <BizList city={this.state.city} category={this.state.category} setParent={this.setParent.bind(this)}/>
           </div>
         </div>
       </div>

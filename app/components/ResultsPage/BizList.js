@@ -16,7 +16,7 @@ class BizList extends React.Component {
      this.state ={
        city: this.props.city,
        category: this.props.category,
-       categoryValue: this.props.categoryValue,
+      //  categoryValue: this.props.categoryValue,
        businesses: [],
        loading: false
      }
@@ -26,13 +26,6 @@ class BizList extends React.Component {
   componentWillMount() {
     this.getBusinesses();
   }
-
-  // getParams () {
-  //   this.setState({
-  //     city: this.props.city,
-  //     category: this.props.category
-  //   })
-  // }
 
   //get businesses from database
   getBusinesses() {

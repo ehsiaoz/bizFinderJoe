@@ -7,7 +7,7 @@ class Map extends Component {
   render() {
     const mapContainer = <div style={{height: '100%', width:'100%'}}></div>
 
-    console.log("this.props.markers", this.props.markers)
+
 
     const markers = this.props.markers.map((biz, i) => {
 
@@ -20,7 +20,7 @@ class Map extends Component {
         return <Marker key={i} {...marker} />
     })
 
-    console.log("markers", markers)
+
 
     return (
 

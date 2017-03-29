@@ -22,7 +22,7 @@ class Header extends React.Component {
     let self = this;
     axios.get('/api/categories')
     .then((response) => {
-      console.log('response from axios get', response.data);
+
 
       self.setState({
         categoryList: response.data,
@@ -36,7 +36,7 @@ class Header extends React.Component {
 
   handleSelect(event) {
     var e = document.getElementById("category");
-    console.log(e.options[e.selectedIndex].text);
+
     this.setState({
       category: e.options[e.selectedIndex].text
     })
@@ -44,7 +44,7 @@ class Header extends React.Component {
 
   redirectToSearch() {
     var pathString = '/search?city=' + this.state.city + '&category=' + this.state.category;
-    console.log('pathString', pathString)
+    
     this.context.router.push(pathString);
     // window.location.reload();
   }

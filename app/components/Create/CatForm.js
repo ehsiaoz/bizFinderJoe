@@ -37,7 +37,7 @@ class CatForm extends React.Component {
     let self = this;
     axios.get('/api/categories')
     .then((response) => {
-      console.log('response from axios get', response.data);
+
 
       self.setState({
         categoryList: response.data,
@@ -58,17 +58,17 @@ class CatForm extends React.Component {
   handleSubmit(event) {
     //prevent submit from refreshing the page
     event.preventDefault();
-    console.log('Save', this.state);
+
     this.props.submitAction(this.state)
   }
 
-  
+
   render() {
 
     const categoryList = this.state.categoryList.map((item, i)=> {
       return <li key={i}>{item.name}</li>
     })
-    console.log("categoryList", this.state.categoryList);
+
 
     return (
       <div>

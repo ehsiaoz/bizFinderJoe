@@ -28,7 +28,7 @@ class Results extends React.Component {
   }
 
   getParams () {
-    console.log("getParamsFunction")
+
     this.setState({
       city: this.props.location.query.city,
       category: this.props.location.query.category
@@ -46,15 +46,13 @@ class Results extends React.Component {
       }
     })
     .then((response) => {
-      console.log('response from axios get', response.data);
 
       self.setState({
-        businesses: response.data,
+        categoryValue: response.data[0]._id,
       });
     })
     .catch((error) => {
       console.log('error', error);
-
     });
   }
 
@@ -82,13 +80,14 @@ class Results extends React.Component {
   }
 
   render() {
-    console.log('this.state.markers: ', this.state.markers);
-    console.log("category in results", this.state.category);
+
+    console.log("categoryValue in results", this.state.categoryValue);
   //  let {setParent, appstate} = this.props;
     return (
       <div>
         <Breadcrumbs />
         <H1 />
+        {this.state.categoryValue}
         <div className="row">
           <div className="col-md-5">
             <div style={{width:"100%", height:800, background: 'red'}}>
@@ -96,7 +95,7 @@ class Results extends React.Component {
             </div>
           </div>
           <div className="col-md-7">
-            <BizList city={this.state.city} category={this.state.category} setParent={this.setParent.bind(this)}/>
+            <BizList city={this.state.city} category={this.state.category} categoryValue={this.state.categoryValue} setParent={this.setParent.bind(this)}/>
           </div>
         </div>
       </div>

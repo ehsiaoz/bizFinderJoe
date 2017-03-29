@@ -7,12 +7,15 @@ router.get('/businesses', function(req, res) {
 
 
   var city = req.query.city;
+
   console.log("city in route", city);
+  console.log("category in route", req.query.category);
 
   if (city){
 
     Business.find({
       city: city
+      // category: category
     },function(err, businesses) {
       if (err) {
         return res.send(err);

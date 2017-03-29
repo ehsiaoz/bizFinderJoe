@@ -55,7 +55,7 @@ class BizForm extends React.Component {
     let self = this;
     axios.get('/api/categories')
     .then((response) => {
-      console.log('response from axios get', response.data);
+
 
       self.setState({
         categoryList: response.data,
@@ -83,14 +83,14 @@ class BizForm extends React.Component {
     //prevent submit from refreshing the page
     event.preventDefault();
     this.getGeoCode();
-    console.log('Save', this.state);
+
     this.props.submitAction(this.state);
   }
 
   getGeoCode(event) {
     let self = this;
     const address_string = this.state.street_address + '+' + this.state.city + '+' + this.state.state;
-    console.log('address_string: ', address_string);
+
     axios.get('https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyB2YjPzqYIuEbcLnKcE27KwdJyNDqd0cPE&address=' + address_string)
       .then(function(response){
         const formatted_address = response.data.results[0].formatted_address;
@@ -102,11 +102,7 @@ class BizForm extends React.Component {
           lat: response.data.results[0].geometry.location.lat,
           lng: response.data.results[0].geometry.location.lng
         }
-        console.log('formatted_address: ', formatted_address);
-        console.log('street_address ', street_address);
-        console.log('location ', location);
-        console.log(response.data);
-        console.log(response.status); // ex.: 200
+
         self.setState({
           formatted_address: formatted_address,
           street_address: street_address,

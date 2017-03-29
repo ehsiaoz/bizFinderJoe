@@ -16,10 +16,12 @@ class BizList extends React.Component {
      this.state ={
        city: this.props.city,
        category: this.props.category,
+       categoryValue: this.props.categoryValue,
        businesses: [],
        loading: false
      }
   }
+
 
   componentWillMount() {
     this.getBusinesses();
@@ -36,21 +38,21 @@ class BizList extends React.Component {
   getBusinesses() {
     this.startLoading();
     let self = this;
-
+    console.log("category value in BizList getBiz", this.props);
     axios.get('/api/businesses', {
       params: {
         city: this.state.city,
-        category: this.state.category
+        // category: this.state.categoryValue
       }
     })
     .then((response) => {
-      console.log('response from axios get', response.data);
+
       self.endLoading();
       self.setState({
         businesses: response.data,
       });
       this.props.setParent(this.state.businesses);
-      console.log('businesses array', this.state.businesses)
+      console.log('Biz Listbusinesses array', this.state.businesses)
     })
     .catch((error) => {
       console.log('error', error);

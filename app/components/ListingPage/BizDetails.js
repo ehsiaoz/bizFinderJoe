@@ -23,11 +23,17 @@ class BizDetails extends React.Component {
     return (
 
       <div>
-        <h1>{this.props.biz.name}</h1>
+        <h1 className='bizdetail_name'>{this.props.biz.name}</h1>
         <br/>
-        <h4>Address:</h4><p>{this.props.biz.street_address}</p>
+        <h4 className="bizdetail">Address:</h4>
+        <p>{this.props.biz.street_address}</p>
         <p>{this.props.biz.city}, {this.props.biz.state}</p>
         <p>{this.props.biz.zipcode}</p>
+        <h4 className="bizdetail">Phone:</h4>
+        <p>{this.props.biz.phone}</p>
+        <h4 className="bizdetail">Website:</h4>
+        <p>{this.props.biz.website_url}</p>
+
       </div>
     );
   }

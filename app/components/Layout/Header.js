@@ -65,9 +65,10 @@ class Header extends React.Component {
       <div>
         <nav className="navbar navbar-fixed-top" role="banner">
           {/* Container */}
+          <a className="navbar-brand" href="#" style={{color: 'white'}}>Biz Finder
+          </a>
           <div className="container">
-            <a className="navbar-brand" href="#" style={{color: 'white'}}>Biz Finder
-            </a>
+
             {/* top global search form */}
             <form className="navbar-form navbar-left"
             onSubmit = {(event) => this.handleSubmit(event)}

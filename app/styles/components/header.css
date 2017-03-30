@@ -19,3 +19,8 @@
 .autocomplete {
   z-index: 1001
 }
+
+.h1_header {
+  margin-top: 10px;
+  margin-bottom: 10px
+}

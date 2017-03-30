@@ -5,3 +5,20 @@
 .odd {
   background-color: #FBFAF5;
 }
+
+.bizcard_title {
+  margin-bottom: 10px
+}
+
+.biz_info {
+  margin-bottom: 10px
+}
+
+.info {
+  display:inline;
+  font-weight: bold;
+}
+
+.more_button {
+  background-color: orange
+}

@@ -61,18 +61,25 @@ class Listing extends React.Component {
           <H1 h1={this.state.biz.name}/>
         </div>
         <div className="row">
-          <div className="col-md-8">
-            <div className="col-md-6">
-              <BizDetails biz={this.state.biz}/>
+          <div className="col-md-8 biz_main">
+            <div className='row'>
+              <div className="col-md-6">
+                <BizDetails biz={this.state.biz}/>
+              </div>
+              <div className="col-md-6">
+                <div style={{width:300, height:300, background: 'red'}}>
+                  <Map center={this.state.location} markers={this.state.markers} />
+                </div>
+              </div>
             </div>
-            <div className="col-md-6">
-              <div style={{width:300, height:300, background: 'red'}}>
-                <Map center={this.state.location} markers={this.state.markers} />
+            <div className="row">
+              <div className="col-md-12 biz_content">
+                <img src='images/bizcontent.jpg'/>
               </div>
             </div>
           </div>
           <div className="col-md-4">
-            Rail
+            <img src='images/contact.jpg'/>
           </div>
         </div>
 

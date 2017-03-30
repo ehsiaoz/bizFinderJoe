@@ -71,42 +71,49 @@ class Home extends React.Component {
               <div className="col-md-1">
               </div>
               <div className="col-md-10 search_wrapper">
+                <div className="row">
                 <h3>Let's find what you're looking for!</h3>
-                <div className="center-block">
-                  <form className="navbar-form navbar-left"
-                    id="home_form"
-                    onSubmit = {(event) => this.handleSubmit(event)}
-                  >
-                    <div className="form-group">
-                    <select className="form-control"
-                    id="home_category"
-                    onChange = {(event) => this.handleSelect(event)}
-                    >
-                    <option defaultValue> -- select a category -- </option>
-                    {categoryList}
-                    </select>
-                    </div>
-                    <div className="form-group">
-                      <Autocomplete className="form-control autocomplete"
-                          id="home_autocomplete"
-                          style={{width: '100%'}}
-                          onPlaceSelected={(place) => {
-                            this.setState({
-                              city: place.address_components[0].long_name
-                            });
-                          }}
+                </div>
 
-                          types={['(cities)']}
-                          componentRestrictions={{country: "us"}}
-                      />
-                    </div>
-                    <button type="submit"
-                      className="btn btn-default searchbtn"
-                      id="home_button"
-                      aria-label="search">
-                      <span className="glyphicon glyphicon-search" aria-hidden="true"></span>
-                    </button>
-                  </form>
+                <div className="row">
+
+                  <div className="col-md-8 col-md-offset-2">
+                    <form className="navbar-form"
+                      id="home_form"
+                      onSubmit = {(event) => this.handleSubmit(event)}
+                    >
+                      <div className="form-group special_form">
+                      <select className="form-control"
+                      id="home_category"
+                      onChange = {(event) => this.handleSelect(event)}
+                      >
+                      <option defaultValue> -- select a category -- </option>
+                      {categoryList}
+                      </select>
+                      </div>
+                      <div className="form-group special_form">
+                        <Autocomplete className="form-control autocomplete"
+                            id="home_autocomplete"
+                            style={{width: '100%'}}
+                            onPlaceSelected={(place) => {
+                              this.setState({
+                                city: place.address_components[0].long_name
+                              });
+                            }}
+
+                            types={['(cities)']}
+                            componentRestrictions={{country: "us"}}
+                        />
+                      </div>
+                      <button type="submit"
+                        className="btn btn-default searchbtn"
+                        id="home_button"
+                        aria-label="search">
+                        <span className="glyphicon glyphicon-search" aria-hidden="true"></span>
+                      </button>
+                    </form>
+                  </div>
+
                 </div>
               </div>
               <div className="col-md-1">

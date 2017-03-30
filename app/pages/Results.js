@@ -93,7 +93,7 @@ class Results extends React.Component {
         <H1 city={this.state.city} category={this.state.category} />
         <div className="row">
           <div className="col-md-5">
-            <div style={{width:"100%", height:800, background: 'red'}}>
+            <div style={{width:"100%", height:800}}>
               <Map center={this.state.mapCenter} markers={this.state.markers} />
             </div>
           </div>

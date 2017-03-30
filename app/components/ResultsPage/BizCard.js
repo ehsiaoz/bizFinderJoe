@@ -12,9 +12,15 @@ class BizCard extends React.Component {
               <img className="biz-thumbnails" src={thumbnail_url ? thumbnail_url : default_image} alt="" height="225" width="225"/>
           </div>
           <div className="col-md-8">
-            <h4><Link to={`/biz/${_id}`} >{name}</Link></h4>
-            <p>{desc_snippet}</p>
-            <a className="btn btn-default" href="#">More Info</a>
+            <div className='row'>
+              <h4><Link to={`/biz/${_id}`} >{name}</Link></h4>
+            </div>
+            <div className='row desc_snippet'>
+              {desc_snippet}
+            </div>
+            <div className='row'>
+              <a className="btn btn-default" href="#">More Info</a>
+            </div>
           </div>
       </div>
     </div>

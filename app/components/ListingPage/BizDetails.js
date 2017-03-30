@@ -23,8 +23,9 @@ class BizDetails extends React.Component {
     return (
 
       <div>
-        <h4>Address</h4>
-        <p>{this.props.biz.street_address}</p>
+        <h1>{this.props.biz.name}</h1>
+        <br/>
+        <h4>Address:</h4><p>{this.props.biz.street_address}</p>
         <p>{this.props.biz.city}, {this.props.biz.state}</p>
         <p>{this.props.biz.zipcode}</p>
       </div>

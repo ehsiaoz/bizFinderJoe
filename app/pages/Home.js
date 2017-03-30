@@ -136,22 +136,15 @@ class Home extends React.Component {
         </div>
 
         <div className='row'>
-          <div className='col-md-2'>
-          </div>
-          <div className='col-md-8 home_offers'>
+
+          <div className='col-md-12 home_offers'>
             <div className='row'>
-              <div className='col-md-3 pic1'>
-                pic 1
+
+              <div className='col-md-12 offer_image'>
+                <img src='/images/offers.JPG' alt="Offers"/>
+
               </div>
-              <div className='col-md-3 pic2'>
-                pic 2
-              </div>
-              <div className='col-md-3 pic3'>
-                pic 3
-              </div>
-              <div className='col-md-3 pic4'>
-                pic 4
-              </div>
+
             </div>
           </div>
           <div className='col-md-2'>

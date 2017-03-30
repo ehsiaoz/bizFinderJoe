@@ -3,14 +3,18 @@ h3 {
 }
 .home_main {
   height: 200px;
-  border-top: 20px
-
+  border-top: 20px;
 }
 
 .center-block {
   display: block;
   margin-right: auto;
-  margin-left: auto; 
+  margin-left: auto;
+}
+
+.offer_image {
+  display: inline-block;
+  text-align: center;
 }
 
 #home_form {

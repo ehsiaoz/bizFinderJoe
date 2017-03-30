@@ -13,10 +13,7 @@ class Results extends React.Component {
        city: '',
        category: '',
        categoryValue: '',
-       mapCenter: {
-         lat:30.2484381,
-         lng:-97.7503308
-       },
+       mapCenter: {},
        businesses: [],
        markers: []
      }
@@ -24,8 +21,11 @@ class Results extends React.Component {
 
   componentWillMount () {
     this.getParams();
-    // this.getCategoryValue();
 
+  }
+
+  componentDidMount () {
+    this.setMapCenter()
   }
 
   getParams () {
@@ -34,30 +34,8 @@ class Results extends React.Component {
       city: this.props.location.query.city,
       category: this.props.location.query.category
     })
-
-    this.setMapCenter()
   }
 
-  // getCategoryValue() {
-  //
-  //   let self = this;
-  //   var category = this.props.location.query.category;
-  //   console.log("category inside getCategoryValue", category);
-  //   axios.get('/api/categories', {
-  //     params: {
-  //       category: this.props.location.query.category
-  //     }
-  //   })
-  //   .then((response) => {
-  //     console.log("getcategoryvalue: ",response);
-  //     self.setState({
-  //       categoryValue: response.data[0]._id,
-  //     });
-  //   })
-  //   .catch((error) => {
-  //     console.log('error', error);
-  //   });
-  // }
 
   setParent(newBusinesses) {
     this.setState({
@@ -84,14 +62,15 @@ class Results extends React.Component {
   setMapCenter() {
     let self = this;
     var city = this.state.city;
-    axios.get('https://maps.googleapis.com/maps/api/geocode/json?address=' + {city} + '&key=AIzaSyB2YjPzqYIuEbcLnKcE27KwdJyNDqd0cPE')
+    var path_url = 'https://maps.googleapis.com/maps/api/geocode/json?address=' + city + '&key=AIzaSyB2YjPzqYIuEbcLnKcE27KwdJyNDqd0cPE'
+    axios.get(path_url)
     .then(function (response) {
 
-      var lat = parseFloat(response.data.results[0].geometry.location.lat);
-      var lng = parseFloat(response.data.results[0].geometry.location.lng);
+      const lat = parseFloat(response.data.results[0].geometry.location.lat);
+      const lng = parseFloat(response.data.results[0].geometry.location.lng);
       console.log('parselat', lat);
       console.log('parselng', lng);
-      var center = {
+      const center = {
           lat: lat,
           lng: lng
         };
